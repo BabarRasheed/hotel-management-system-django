@@ -1,0 +1,78 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    * {
+        color: white;
+    }
+    .banner {
+        padding-left: 75px;
+    }
+    td{
+        font-family: 'poppins', sans-serif;
+        font-weight: 40;
+    }
+    th{
+        font-weight: 100;
+        text-transform: uppercase;
+        font-size: 1.1em;
+    }
+    td a{
+        font-weight: 100;
+    }
+    h1{
+        font-weight: 100;
+    }
+</style>
+
+<link rel="stylesheet" href="{% static 'css/table.css' %}"/>
+<script src="{% static 'js/table.js' %}"></script>
+
+
+    <main class="table">
+        <section class="table__header">
+            <h1>My Booking List</h1>
+
+            <div class="export__file">
+                <label for="export-file" class="export__file-btn" 
+            </div>
+        </section>
+        <section class="table__body">
+            <table>
+                <thead>
+                    <tr>
+                        <th> Id <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Customer <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Update <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Delete <span class="icon-arrow">&UpArrow;</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for reservation in reservations_list %}
+                        {% if reservation.full_name == user.full_name %}
+                            <tr>
+                                <td> {{ reservation.booking_number }} </td>
+                                <td> <a href="{% url 'hotel:showbooking' reservation.id %}">{{ reservation.full_name }} </a></td>
+                                {% if reservation.approval_status == True %}
+                                    <td> <a href="{% url 'hotel:showbooking' reservation.id %}">Approved </a></td></td>
+                                    <td> <p>Not Deletable</p></td>
+                                {% else %}
+                                    {% if reservation.checked == True %}
+                                        <td> <a href="{% url 'hotel:showbooking' reservation.id %}">Declined</a></td>
+                                        <td> <p>Not Deletable</p></td>
+                                    {% else %}
+                                        <td> <a href="{% url 'hotel:updatebooking' reservation.id %}">Update</a></td>
+                                        <td> <a href="{% url 'hotel:deletebooking' reservation.id %}">Delete</a></td>
+                                    {% endif %}
+                                {% endif %}
+
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+{% endblock content %}

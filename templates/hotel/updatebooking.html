@@ -1,0 +1,153 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<style type="text/css">
+   					                
+body{padding-top: 25px; margin-left: 250px; color: #fff;}
+input, select, textarea{
+    margin-bottom: 1%;
+}
+.col-lg-3 {
+    font-weight: 300;
+}		   
+button {
+    margin-bottom: 20px;
+}
+          
+</style>
+
+</head>
+<body>
+<div class="row">
+<div class="text-center">
+<form method="POST" class="form-horizontal" role="form" enctype="multipart/form-data">
+{% csrf_token %}
+
+</div>
+</div>
+
+<div class="col-md-9 personal-info">
+<input type="text" name="reservation_id" hidden value="{{ reservation_update.booking_number }}">
+<h3>Update Booking</h3>
+<div class="form-group">
+<input type="text" name="booking_number" value="{{ reservation_update.booking_number }}" hidden/>
+<label class="col-lg-3 control-label">Full Name:</label>
+<div class="col-lg-8">
+<input class="form-control" type="text" id="full_name" name="full_name" value="{{ reservation_update.full_name }}" disabled>
+</div>
+</div>
+<div class="form-group">
+<label class="col-lg-3 control-label">Username:</label>
+<div class="col-lg-8">
+<input class="form-control" type="text" id="username" name="username" value="{{ reservation_update.username }}" disabled>
+</div>
+</div>
+<div class="form-group">
+<label class="col-lg-3 control-label">Email:</label>
+<div class="col-lg-8">
+<input class="form-control" type="text" id="email" name="email" value="{{ reservation_update.email }}" disabled>
+</div>
+</div>
+<div class="form-group">
+<label class="col-lg-3 control-label">Contact Number:</label>
+<div class="col-lg-8">
+<input class="form-control" type="text" id="phone" name="phone" value="{{ reservation_update.phone }}" disabled>
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-lg-3 control-label">Room:</label>
+<class class="col-lg-8">
+<div class="ui-select">
+<input type=text name="prevroom" value="{{ reservation_update.room }}" hidden>
+<select id="room" name="room" class="form-control">
+<option value="{{ reservation_update.room }}" selected hidden>{{ reservation_update.room }}</option>
+{% for room in hotel %}
+    {% if room.available %}
+        <option value = "{{ room.name }}">{{ room.name }}</option>
+    {% else %}
+        <option value = "{{ room.name }}">{{ room.name }} - Busy</option>
+    {% endif %}
+{% endfor %}
+</select>
+</div>
+</class>
+</div>
+
+<div class="form-group">
+<label class="col-lg-3 control-label">Check-In:</label>
+<div class="col-lg-8">
+<input class="form-control" type="datetime-local" id="reservation_date" name="reservation_date" value="{{ data.0 }}">
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-lg-3 control-label">Check-Out:</label>
+<div class="col-lg-8">
+<input class="form-control" type="datetime-local" id="reservation_date_out" name="reservation_date_out" value="{{ data.1 }}">
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-lg-3 control-label">Party Size:</label>
+<div class="col-lg-8">
+<input class="form-control" type="number" id="party_size" min = "1" name="party_size" value="{{ reservation_update.party_size }}">
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-lg-3 control-label">Special Request:</label>
+<div class="col-lg-8">
+<textarea style="resize: none;" rows="3" class="form-control" type="text" id="special_requests" name="special_requests" placeholder="Special Request">{{ reservation_update.special_requests }}</textarea>
+</div>
+</div>
+
+<div class="form-group">
+<br/>
+<label class="col-lg-3 control-label">Wallet:</label>
+<div class="col-lg-8">
+<input class="form-control" type="text" id="wallet" name="wallet" value="{{ reservation_update.wallet }}" disabled>
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-lg-3 control-label">Price:</label>
+<div class="col-lg-8">
+<input class="form-control" type="text" id="price" name="price" value="{{ reservation_update.price }}" disabled>
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-lg-3 control-label">Change:</label>
+<div class="col-lg-8">
+<input class="form-control" type="text" id="change" name="change" value="{{ reservation_update.change }}" disabled>
+<br/>
+<button type="submit" id="submit" class="form-control">Submit</button>
+</div>
+</div>
+
+
+</div>
+</div>
+</div>
+</div>
+</form>
+</div>
+</div>
+</div>
+<br/>
+
+
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	
+</script>
+</body>
+</html>
+
+{% endblock content %}

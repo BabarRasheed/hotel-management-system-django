@@ -1,0 +1,63 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta http-equiv"X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Welcome to Greed's Hotel in Cebu Philippines">
+    <meta name="keywords" content="hotel, cebu hotel, philippines hotel">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <title>Greed's Hotel Management | Welcome</title>
+</head>
+<body>
+    <header>
+    <div id="showcase">
+      <div class="container">
+        <div class="showcase-content">
+          <p class="lead"> Welcome to the best hotel in the Philippines. Looking for a place to stay? Book now!</p>
+          <h1>Enjoy Your <span class="text-primary">Stay</span></h1>
+          <a class="btn" href="{% url 'hotel:book' %}">Book Now</a>
+        </div>
+    </div>
+</div>
+</header>
+
+<section id="home-info" class="bg-dark">
+  <div class="info-img"></div>
+  <div class="info-content">
+    <h2><span class="text-primary">Greed's Hotel History</span>Of Our Hotel</h2>
+    <p> Greed's Hotel Management, established in the vibrant 1990s, is a luxurious haven located in Argao, Cebu. With a fusion of traditional Filipino charm and modern comforts, the hotel offers a serene escape amidst picturesque landscapes. Its opulent suites, gourmet restaurant, spa, and outdoor pool create a lavish experience. The dedicated staff ensures personalized service, making it a top choice for leisure and business travelers alike. As a symbol of luxury, Greed's Hotel Management continues to be celebrated as one of the finest establishments in the Philippines, beckoning guests to indulge in a timeless blend of hospitality and sophistication. </p>
+    <a href="aboutus.html" class="btn btn-light">Read More</a>
+  </div>
+</section>
+
+<section id="features">
+  <div class="box bg-light">
+    <i class="fas fa-hotel fa-3x"></i>
+    <h3>Location</h3>
+    <p>Suba, Argao, Cebu</p>
+</div>
+  <div class="box bg-primary">
+    <i class="fas fa-utensils fa-3x"></i>
+  <h3>Free Meals</h3>
+    <p>King Crab, Lobster, Wagyu Steak</p>
+</div>
+  <div class="box bg-light">
+    <i class="fas fa-dumbbell fa-3x"></i>
+  <h3>Fitness Room</h3>
+    <p>Gym all day everyday</p>
+</div>
+</section>
+
+<div class="clr"></div>
+
+<footer id="main-footer">
+  <p> Greed's Hotel Management &copy; 2023, All Rights Reserved</p>
+</footer>
+</body>
+</html>
+
+{% endblock content %}

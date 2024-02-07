@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing:border-box;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+}
+    
+body {
+    background: radial-gradient(circle at 10% 20%, rgb(0, 0, 0) 0%, rgb(64, 64, 64) 90.2%);
+    min-height: 100vh;
+    background-size: cover;
+}
+
+nav {
+    color: black;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    backdrop-filter: blur(100px);
+    width: 68px;
+    overflow: hidden;
+    transition: width 0.2s linear;
+    box-shadow: 0 -10px 50px rgba(0, 0, 0, 0.3);
+    z-index: 99999999999;
+}
+
+.logo{
+    height: 65px;
+    text-align: center;
+    display: flex;
+    transition: all 0.5s ease;
+}
+
+.profile{
+    margin-left: -8px;
+    margin-top: -4px;
+    width: 40px;
+    height: 40px;
+    border: 50%;
+}
+
+.logo {
+    font-weight: 300;
+    padding-left: 80px;
+    font-size: 18px;
+    padding-top: 18px;
+}
+
+li a{
+    position: relative;
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    display: table;
+    width: 300px;
+    padding: 10px;
+}
+
+nav .fas{
+    position: relative;
+    width: 50px;
+    height: 40px;
+    top: 10px;
+    font-size: 20px;
+    text-align: center;
+}
+
+li .profile{
+    background: white;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    position: fixed;
+    width: 45px;
+    height: 45px;
+    top: 14px;
+    left: 22px;
+}
+
+.nav-item{
+    position: relative;
+    top: 7px;
+    margin-left: 20px;
+    font-weight: 200;
+}
+
+li a:hover{
+    text-decoration: none;
+    position: relative;
+    color: rgb(106, 224, 90);
+    background: #ffffff1e;
+}
+
+nav:hover{
+    width: 250px;
+    transition: all 0.5s ease;
+}
+
+.logout{
+    position: absolute;
+    bottom: 0;
+}

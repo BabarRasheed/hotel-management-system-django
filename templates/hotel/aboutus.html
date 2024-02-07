@@ -1,0 +1,67 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/aboutus.css' %}">
+<style>
+    h2 {
+        margin-left: 100px;
+    }
+    #testimonials {
+        margin-top: 30px;
+    }
+    .testimonial {
+        margin-left: 100px;
+        margin-right: 30px;
+    }
+</style>
+<img class="greed" src="{% static 'img/logo2.png' %}" alt="greed">
+<section id="about-info" class="bg-light py-3">
+    <div class="container">
+        <div class="info-left">
+            <h1 class="l-heading"><span class="text-primary">About </span>Greed's Hotel</h1>
+            <p>Greed's Hotel in Argao, Cebu, Philippines, was founded by Celso M. Puerto Jr. and Maria Zyma Saphy Legaspi Quipao in 1995. Situated on a hill, the hotel offered stunning views of the Bohol Strait. Combining modern comfort with Filipino cultural elements, the hotel became popular for its hospitality and commitment to showcasing the local heritage. </p><p>
+                The "Sugbo Flavors" restaurant highlighted Cebuano cuisine. Over the years, Greed's Hotel contributed to the community and earned recognition for sustainable tourism. The Founder's vision made the hotel a beacon of hospitality, inviting guests to experience the charm of Argao and Cebuano culture.
+            </p>
+        </div>
+        <div class="info-right">
+            <img src="{% static 'img/background.png' %}" alt="hotel">
+        </div>
+    </div>
+</section>
+
+<div class="clr"></div>
+
+<section id="testimonials" class="py-3">
+    <div class="container">
+        <h2 class="l-heading">Founders</h2>
+        <div class="testimonial bg-primary">
+            <img src="{% static 'img/dev1.jpg' %}" alt="celso">
+            <p>Hi, I'm Celso a dynamic individual passionate about computers, games, and music. I thrive on exploring and finding new things to do with the help of God our father who arth in heaven, believe in continuous growth, and am eager to connect and explore new opportunities. Let's engage!</p>
+        </div>
+
+        <div class="testimonial bg-primary">
+            <img src="{% static 'img/dev2.jpg' %}" alt="zyma">
+            <p>Hello, I'm Zyma a motivated individual with a keen interest in singing, art, cooking, and sleeping. Whether I'm engaged in work, pursuing hobbies, or any other relevant activities, I bring enthusiasm and a commitment to excellence. Eager to connect and discover new possibilities!</p>
+        </div>
+    </div>
+</section>
+<script>
+    var greedLogo = document.querySelector('.greed');
+    var lastScrollTop = 0;
+
+    window.addEventListener("scroll", function() {
+        var scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+        if (scrollTop > lastScrollTop) {
+        // Scrolling down
+            greedLogo.style.opacity = "0";
+        } else {
+        // Scrolling up
+            greedLogo.style.opacity = "1";
+        }
+
+        
+    });
+</script>
+{% endblock content %}

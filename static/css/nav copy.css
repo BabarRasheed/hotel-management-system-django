@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing:border-box;
+    font-family: 'Poppins', sans-serif;
+}
+body {
+    background-image: linear-gradient(rgba(0,0,0,1), #1a1a1a), url(../img/wallpaper1.jpeg);
+    min-height: 100vh;
+    background-size: cover;
+}
+header {
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items: center;
+    transition: 0.6s;
+    padding: 40px 100px;
+    z-index: 100000;
+    transition: 0.6s;
+}
+header.sticky {
+    padding: 5px 100px;
+    background: #fff;
+    box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.5);
+}
+header .logo {
+    width: 100%;
+    max-width: 130px;
+    height: auto;
+    transition: 0.6s;
+}
+header .logo:hover {
+    -webkit-filter: invert(100%); 
+    filter: invert(25%);
+    width: 100%;
+    max-width: 130px;
+    height: auto;
+    transition: 0.6s;
+}
+header ul {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+header ul li {
+    position: relative;
+    list-style: none;
+}
+header ul li label,
+header ul li a {
+    position: relative;
+    margin: 0 15px;
+    text-decoration: none;
+    letter-spacing: 2px;
+    color: #fff;
+    font-weight: 500px;
+    transition: 0.6s;
+}
+header ul li label:hover {
+    color: #ff9c9c;
+    transition: 0.6s;
+}
+header ul li a:hover {
+    color: #ff9c9c;
+    transition: 0.6s;
+}
+/*.banner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #810000;
+    background-size: cover;
+}
+.celso {
+    padding-top: 175px;
+}*/
+header.sticky .logo {
+    -webkit-filter: invert(100%); 
+    filter: invert(100%);
+    width: 100%;
+    max-width: 75px;
+    height: auto;
+    transition: 0.6s;
+}
+header.sticky .logo:hover {
+    -webkit-filter: invert(100%); 
+    filter: invert(50%);
+    width: 100%;
+    max-width: 75px;
+    height: auto;
+    transition: 0.6s;
+}
+header.sticky ul li label,
+header.sticky ul li a {
+    color: #000;
+}
+header.sticky ul li a:hover {
+    color: rgb(255, 0, 0);
+    transition: 0.6s;
+}
+header.sticky ul li label:hover {
+    color: rgb(255, 0, 0);
+    transition: 0.6s;
+}

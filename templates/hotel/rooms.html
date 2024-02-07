@@ -1,0 +1,159 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% load djmoney %}
+{% block content %}
+<link rel = "stylesheet" href = "{% static 'css/rooms/rooms.css' %}">
+<link rel = "stylesheet" href = "{% static 'css/rooms/normalize.css' %}">
+<link rel = "stylesheet" href = "{% static 'css/rooms/responsive.css' %}">    
+<link rel = "stylesheet" href = "{% static 'css/rooms/style.css' %}">
+<link rel = "stylesheet" href = "{% static 'css/rooms/utility.css' %}">
+<style>
+    .container {
+        padding-left: 75px;
+    }
+</style>
+<div class="container">
+    <section class = "banner" id = "banner">
+        <div class = "card-container">
+            <div class = "card-content" >
+                <h3>Book Now</h3>
+                <form method="post" id="form4">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        {% if request.user.is_authenticated %}
+                            <input type="text" id="name" name="full_name" value="{{request.user.full_name}}" readonly>
+                            <input type="text" id="username" name="username" value="{{request.user.username}}" readonly>
+                            <input type="text" id="email" name="email" value="{{request.user.email}}" readonly>
+                        {% else %}
+                            <input type="text" id="name" name="full_name" placeholder="Full Name" value="{{data.0}}">
+                            <input type="text" id="username" name="username" placeholder="Username" value="{{data.1}}">
+                            <input type="email" id="email" name="email" placeholder="Email" value="{{data.2}}">
+                        {% endif %}
+                    </div>
+
+                    <div class = "form-row">
+                        {% if request.user.is_authenticated %}
+                        <input type = "text" placeholder="Phone Number" value = "{{request.user.phone}}" name="phone" readonly>
+                        {% else %}
+                        <input type = "text" placeholder="Phone Number" value="+63" name="phone" value="{{data.3}}">
+                        <input type = "password" placeholder="Password" name="password">
+                        {% endif %}
+                        <select id = "room" name = "room">
+                            <option value = "{{roomdefault.0}}" selected hidden>{{roomdefault.0}}</option>
+                            <option value = "Greed Hotel">Greed Hotel</option>
+                            {% for room in hotel %}
+                                {% if room.available %}
+                                    <option value = "{{ room.name }}">{{ room.name }}</option>
+                                {% else %}
+                                    <option value = "{{ room.name }}">{{ room.name }} - Busy</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class = "form-row">
+                        <input type = "number" name="party_size" placeholder="People" min = "1" value="{{data.6}}">
+                        <input name = "reservation_date" type = "datetime-local" value="{{data.7}}">
+                        <input name = "reservation_date_out" type = "datetime-local" value="{{data.8}}">
+                    </div>
+
+                    <div class="form-row" id="textareasize">
+                        <textarea class="textarea" placeholder="Special Request (optional)" id="special_requests" name="special_requests" rows="4" cols="150">{{data.9}}</textarea>
+                    </div>
+                    <div class = "form-row">
+                        <button type = "submit" value = "BOOK TABLE">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <br><br>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        // Get the current date and time in the format expected by the datetime-local input
+        var currentDate = new Date().toISOString().slice(0, 16);
+
+        // Set the default value for the reservation_date input
+        document.getElementsByName('reservation_date')[0].value = currentDate;
+        });
+    </script>
+    
+    <style>
+        .price {
+            text-align: left;
+            font-size: 25px;
+        }
+        .menu-title, .menu-image {
+            color: black;
+        }
+        .menu-image {
+            font-size: 20px;
+        }
+        .menu-title {
+            text-align: justify;
+        }
+        .hotel-title{
+            font-family: Poppins, sans-serif;
+            font-size: 18px;
+            font-weight: 300;
+        }
+        .item .menu-btn4 {
+            font-family: Poppins, sans-serif;
+            font-size: 20px;
+            font-weight: 400;
+        }
+    </style>
+
+    <section class="items" id="items">
+
+        {% for room in hotel %}
+            <div class="item">
+                <div class="popup-menu" id="popup-{{ room.name|slugify }}">
+                    <div class="overlay"></div>
+                    <div class="content">
+                        <div class="close-btn" id="close-btn-{{ room.name|slugify }}">&times;</div>
+                        <h1 class="menu-title">{{ room.name }}</h1>
+                        <p class="price" style="font-size: 20px;">Price: {{ room.price }}</p>
+                        <br/>
+                        <p class="menu-image" style="font-size: 17px;">Desciption: {{ room.description }}</p>
+                        <br/>
+                        {% if room.available %}
+                            <button style = "background-color: greenyellow; color: black; font-weight: 200;">Available</button>
+                        {% else %}
+                            <button style = "background-color: rgb(255, 145, 0); color: black;">Busy</button>
+                        {% endif %}
+                    </div>
+                </div>
+                <img src="{{ room.image.url }}">
+                <br>
+                <h4 class="hotel-title">{{ room.name }}</h4>
+                <a class="menu-btn4" onclick = "togglePopup('{{ room.name|slugify }}')">Info</a>
+                <button onclick="redirectToForm()">Reserve</button>
+            </div>
+            <script>
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    function redirectToForm() {
+                    window.location.href = "#banner"; // locate the id="banner"
+                    }
+
+                    document.getElementById("close-btn-{{ room.name|slugify }}").addEventListener("click", function() {
+                        toggleClose('{{ room.name|slugify }}')
+                    });
+
+                    function toggleClose(identifier) {
+                    document.getElementById("popup-" + identifier).classList.remove("active");
+                    document.getElementById("popup-" + identifier).classList.toggle("inactive");
+                    }
+                    function togglePopup(identifier) {
+                    document.getElementById("popup-" + identifier).classList.remove("inactive");
+                    document.getElementById("popup-" + identifier).classList.toggle("active");
+                    } 
+            </script>
+        {% endfor %}
+
+    </section>
+</div>
+
+{% endblock content %}

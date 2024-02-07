@@ -1,0 +1,113 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+<style>
+    * {
+        color: rgb(255, 255, 255);
+    }
+    .banner {
+        padding-left: 75px;
+    }
+    body{   
+        padding:10px 300px 0 300px;
+    }
+    h1{
+        padding: 200px 0 0 0;
+        color: #ffffff;
+    }
+    .move{
+        margin-top: 50px;
+        margin-bottom: 50px;
+        color: #000000;
+    }
+    .celso {
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        color:#ffffff;
+        border-radius: 50px;
+        background-color: rgba(0, 0, 0, 0.445);
+        display: flex;
+        position: relative;
+        align-content: center;
+        justify-content: center;
+    }
+
+    .celso2 {
+        width: 100%;
+        top: 10px;
+        height: 25px;
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        color:#ffffff;
+        background-color: black;
+        display: flex;
+        position: relative;
+        align-content: center;
+        justify-content: center;
+    }
+    .feedback {
+        color: black;
+    }
+    .card-header{
+        font-size: 20px;
+    }
+</style>
+<div class="celsomove">
+    <div class="move">
+    <div class="card text-white bg-primary mb-3" style="max-width: 100%;">
+        <div class="card-header">{{ reservations_show }} - Details</div>
+        <br/>
+        <div class="card-body">
+        <h4 class="card-title">ID: {{ reservations_show.booking_number }}</h4>
+        <p class="card-text">Fullname: {{ reservations_show.full_name }}</p>
+        <p class="card-text">Username: {{ reservations_show.username }}</p>
+        <p class="card-text">Email: {{ reservations_show.email }}</p>
+        <p class="card-text">Phone: {{ reservations_show.phone }}</p>
+        <p class="card-text">Room: {{ reservations_show.room }}</p>
+        <p class="card-text">People: {{ reservations_show.party_size }}</p>
+        <p class="card-text">Check-In: {{ reservations_show.reservation_date }}</p>
+        <p class="card-text">Check-Out: {{ reservations_show.reservation_date_out }}</p>
+        <p class="card-text">Special Requests: {{ reservations_show.special_requests }}</p>
+        <p class="card-text">Wallet: {{ reservations_show.wallet }}</p>
+        <p class="card-text">Price: {{ reservations_show.price }}</p>
+        <p class="card-text">Change: {{ reservations_show.change }}</p>
+        <form method="POST">        
+            {% csrf_token %}
+            <input type="text" name="reservation_id" value="{{ reservations_show.booking_number }}" hidden>
+            <label for="approved">
+                <input type="radio" id="approved" name="approval_status" value="approved">
+                Approve
+            </label>
+        
+            <label for="declined">
+                <input type="radio" id="declined" name="approval_status" value="declined">
+                Decline
+            </label>
+            <br/>
+            <textarea style="resize: none; border: 5px solid #fff; border-radius: 10px; color: black;" placeholder="Admin Feedback" id="approval_comment" name="approval_comment" rows="3" cols="50" required></textarea>
+            <br/>
+            <button class="celso2" type="submit">ADMIN SUBMIT</button>
+            <br/>
+        </form>
+        <a href="{% url 'hotel:listreserve' %}" class="celso">GO BACK</button>
+        </div>
+    </div>
+</div>
+</div>
+    <center>
+        <h1></h1>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+       
+    </center>
+
+{% endblock content %}

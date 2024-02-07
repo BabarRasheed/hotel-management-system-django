@@ -1,0 +1,220 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Greed Hotel</title>
+    <link rel="stylesheet" href="{% static 'css/nav.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/dropdown.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/message.css' %}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+    <link rel="icon" href="{% static 'img/logo2.png' %}"/>
+</head>
+<header>
+    <div style="margin-left: 30%; margin-right: 30%;" id="messagemain" class="messagemain">
+
+        {% include 'common/messages.html' %}
+        
+    </div>
+</header>
+<body>
+    <style>
+        .validate2 {
+            position: fixed;
+            color: red;
+            left: 50%; 
+            transform: translate(-50%);
+            top: 50px;
+        }
+        .home {
+            text-align: center;
+            position: fixed;
+            top: 2%;
+            right: 1%;
+            color: white;
+            border: 1px solid white;
+            border-radius: 5px;
+            width: 70px;
+            transition: 0.5s ease;
+            z-index: 99999999999;
+            box-shadow: 0 -10px 50px rgba(0, 0, 0, 0.5);
+        }
+        .home:hover {
+            color: black;
+            border: 1px solid #000;
+            background-color: white;
+        }
+    </style>
+
+    <!-- <div id="alrt" class="validate2">
+
+        {% include 'common/messages.html' %}
+        
+    </div> -->
+    <a class="home" href="{% url 'greedhotel:home' %}">Home</a>
+    <nav>
+        <ul>
+            {% if request.user.isAdmin == True %}
+            <li>
+                <a class="logo" href="#">{{ request.user.username }}</a>
+                {% if request.user.profile_picture %}
+                    <img class="profile" src="{{request.user.profile_picture.url}}" alt="">
+                {% else %}
+                    <img class="profile" src="" alt="">
+                {% endif %}
+                
+                <ul class="dropdown">
+                    <li><a href="http://127.0.0.1:8000/admin/">
+                        <i class="fas fa-user"></i>
+                        <span class="nav-item">Admin Panel</span>
+                    </a></li>
+                    <li><a href="{% url 'hotel:listreserve' %}">
+                        <i class="fas fa-key"></i>
+                        <span class="nav-item">Reservations</span>
+                    </a></li>
+                </ul>
+            </a>
+            <li><a href="{% url 'hotel:book' %}">
+                <i class="fas fa-hotel"></i>
+                <span class="nav-item">Book Now</span>
+            </a></li>
+            <li><a href="{% url 'hotel:contactus' %}">
+                <i class="fas fa-phone"></i>
+                <span class="nav-item">Contact Us</span>
+            </a></li>
+            <li><a href="{% url 'hotel:aboutus' %}">
+                <i class="fas fa-address-card"></i>
+                <span class="nav-item">About Us</span>
+            </a></li>
+            </li>
+            <li class="logout"><a  href="{% url 'hotel:logout' %}">
+                <i class="fas fa-sign-out-alt"></i>
+                <span class="nav-item">Logout</span>
+            </a></li>
+            {% elif request.user.isEmployee %}
+            <li>
+                <a class="logo" href="#">{{ request.user.username }}</a>
+                {% if request.user.profile_picture %}
+                    <img class="profile" src="{{request.user.profile_picture.url}}" alt="">
+                {% else %}
+                    <img class="profile" src="" alt="">
+                {% endif %}
+                
+                <ul class="dropdown">
+                    <li><a href="{% url 'hotel:listreserve' %}">
+                        <i class="fas fa-key"></i>
+                        <span class="nav-item">Reservations</span>
+                    </a></li>
+                </ul>
+            </a>
+            </li>
+            <li class="logout"><a  href="{% url 'hotel:logout' %}">
+                <i class="fas fa-sign-out-alt"></i>
+                <span class="nav-item">Logout</span>
+            </a></li>
+            {% elif request.user.is_authenticated %}
+            <li>
+                    {% if request.user.guest == True %}
+                        <a class="logo" href="#">GUEST</a>
+                    {% else %}
+                        <a class="logo" href="#">{{ request.user.username }}</a>
+                    {% endif %}
+                    <img class="profile" src="{{request.user.profile_picture.url}}" alt="">
+                    <ul class="dropdown">
+                        <li><a href="{% url 'hotel:profile' request.user.user_number %}">
+                            <i class="fas fa-user"></i>
+                            <span class="nav-item">Profile</span>
+                        </a></li>
+                        {% if not request.user.verified %}
+                            <li><a href="{% url 'hotel:verify2' %}">
+                                <i class="fas fa-user"></i>
+                                <span class="nav-item">Verify Account</span>
+                            </a></li>
+                        {% endif %}
+                        <li><a href="{% url 'hotel:listbooking' %}">
+                            <i class="fas fa-key"></i>
+                            <span class="nav-item">Booking</span>
+                        </a></li>
+                    </ul>
+                </a>
+            </li>
+            <!-- <li>
+                <div class="dropdown">
+                    <input type="text" class="textBox" placeholder="{{request.user.username}}" readonly>
+                    <div class="option">
+                        <div onclick="redirectToProfile()">Profile</div>
+                        <div onclick="redirectToBookingList()">My Booking</div>
+                        <div onclick="redirectToLogOut()">Logout</div>
+                    </div>
+                </div>
+            </li> -->
+            <li><a href="{% url 'hotel:book' %}">
+                <i class="fas fa-hotel"></i>
+                <span class="nav-item">Book Now</span>
+            </a></li>
+            <li><a href="{% url 'hotel:contactus' %}">
+                <i class="fas fa-phone"></i>
+                <span class="nav-item">Contact Us</span>
+            </a></li>
+            <li><a href="{% url 'hotel:aboutus' %}">
+                <i class="fas fa-address-card"></i>
+                <span class="nav-item">About Us</span>
+            </a></li>
+            <li class="logout"><a  href="{% url 'hotel:logout' %}">
+                <i class="fas fa-sign-out-alt"></i>
+                <span class="nav-item">Logout</span>
+            </a></li>
+            {% else %}
+            <li><a href="{% url 'hotel:login' %}">
+                <i class="fas fa-user"></i>
+                <span class="nav-item">Login</span>
+            </a></li>
+            <li><a href="{% url 'hotel:signup' %}">
+                <i class="fas fa-user-plus"></i>
+                <span class="nav-item">Sign Up</span>
+            </a></li>
+            <li><a href="{% url 'hotel:book' %}">
+                <i class="fas fa-hotel"></i>
+                <span class="nav-item">Book Now</span>
+            </a></li>
+            <li><a href="{% url 'hotel:contactus' %}">
+                <i class="fas fa-phone"></i>
+                <span class="nav-item">Contact Us</span>
+            </a></li>
+            <li><a href="{% url 'hotel:aboutus' %}">
+                <i class="fas fa-address-card"></i>
+                <span class="nav-item">About Us</span>
+            </a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    <section class="banner">
+        <div class="celso">
+            {% block content %}
+
+            {% endblock %}
+        </div>
+    </section>
+    <script src="{% static 'js/message.js' %}"></script>
+    <script>
+        setTimeout(function() {document.getElementById('messagemain').innerHTML='';},5100);
+        let dropdown = document.querySelector('.dropdown');
+        dropdown.onclick = function(){
+            dropdown.classList.toggle('active');
+        }
+        function redirectToReserveList() {
+            window.location.href = "{% url 'hotel:listreserve' %}";
+        }
+        function redirectToProfile() {
+
+        }
+        function redirectToBookingList() {
+            window.location.href = "{% url 'hotel:listbooking' %}";
+        }
+        function redirectToLogOut() {
+            window.location.href = "{% url 'hotel:logout' %}";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<style type="text/css">
+    					                
+body{margin-top:20px; margin-left: 125px; color: #fff;}
+.avatar{
+width:200px;
+height:200px;
+}		
+input, select{
+    margin-bottom: 1%;
+}
+.col-lg-3 {
+    font-weight: 300;
+}
+.text-primary {
+    color: white;
+}            
+</style>
+
+</head>
+<body>
+<div class="container bootstrap snippets bootdey">
+<h1 class="text-primary">Edit Profile</h1>
+<br/>
+<div class="row">
+
+<div class="col-md-3">
+<div class="text-center">
+<form method="POST" class="form-horizontal" role="form" enctype="multipart/form-data">
+{% csrf_token %}
+<img src="{{ user.profile_picture.url }}" class="avatar img-circle img-thumbnail" alt="avatar">
+<h6>+ Upload photo</h6>
+<input type="file" id="profile_picture" name="profile_picture" class="form-control">
+</div>
+</div>
+
+<div class="col-md-9 personal-info">
+
+<h3>Personal info</h3>
+<div class="form-group">
+<label class="col-lg-3 control-label">Full Name:</label>
+<div class="col-lg-8">
+<input class="form-control" type="text" id="full_name" name="full_name" value="{{ user.full_name }}">
+</div>
+</div>
+<div class="form-group">
+<label class="col-lg-3 control-label">Username:</label>
+<div class="col-lg-8">
+<input class="form-control" type="text" id="username" name="username" value="{{ user.username }}" disabled>
+</div>
+</div>
+<div class="form-group">
+<label class="col-lg-3 control-label">Email:</label>
+<div class="col-lg-8">
+<input class="form-control" type="text" id="email" name="email" value="{{ user.email }}" disabled>
+</div>
+</div>
+<div class="form-group">
+<label class="col-lg-3 control-label">Contact Number:</label>
+<div class="col-lg-8">
+<input class="form-control" type="text" id="phone" name="phone" value="{{ user.phone }}">
+</div>
+</div>
+<div class="form-group">
+<label class="col-lg-3 control-label">Gender:</label>
+<class class="col-lg-8">
+<div class="ui-select">
+<select id="gender" name="gender" class="form-control">
+<option value="{{ request.user.gender }}" selected hidden>{{ user.gender }}</option>
+<option value="Other">Other</option>
+<option value="Male">Male</option>
+<option value="Female">Female</option>
+</select>
+</div>
+
+</class>
+</div>
+<div class="form-group">
+<label class="col-lg-3 control-label">Country:</label>
+<div class="col-lg-8">
+<input class="form-control" type="text" id="country" name="country" value="{{ user.country }}">
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-lg-3 control-label">City:</label>
+<div class="col-lg-8">
+<input class="form-control" type="text" id="city" name="city" value="{{ user.city }}">
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-lg-3 control-label">Address:</label>
+<div class="col-lg-8">
+<input class="form-control" type="text" id="address" name="address" value="{{ user.address }}">
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-lg-3 control-label">Wallet:</label>
+<div class="col-lg-8">
+
+<input class="form-control" type="text" id="wallet" name="wallet" value="{{ user.wallet }}" disabled>
+
+</div>
+</div>
+
+<div class="form-group">
+<label class="col-lg-3 control-label">Verified:</label>
+<div class="col-lg-8">
+{% if request.user.verified %}
+    <input type="checkbox" checked disabled>
+{% else %}
+    <input type="checkbox" disabled>
+{% endif %}
+<br/>
+<br/>
+
+<input type="hidden" id="user_number" name="user_number" value="{{ user.user_number }}"/>
+
+<button type="submit" id="submit" class="form-control">Save</button>
+</div>
+</div>
+</div>
+</div>
+</form>
+</div>
+</div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	
+</script>
+</body>
+</html>
+
+{% endblock content %}

@@ -1,0 +1,88 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<style>
+    * {
+        color: rgb(255, 255, 255);
+    }
+    .banner {
+        padding-left: 75px;
+    }
+    body{
+
+        padding: 80px 300px 0 300px;
+    }
+    h1{
+        padding: 200px 0 0 0;
+        color: #ffffff;
+    }
+    .move{
+        margin-top: 50px;
+        margin-bottom: 50px;
+        color: #000000;
+    }
+    .celso {
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        color:#ffffff;
+        border-radius: 50px;
+        background-color: rgba(0, 0, 0, 0.445);
+        display: flex;
+        position: relative;
+        align-content: center;
+        justify-content: center;
+    }
+    .card-header{
+        font-size: 20px;
+    }
+</style>
+<div class="move">
+    <div class="card text-white bg-primary mb-3" style="max-width: 100%;">
+        <div class="card-header">{{ reservations_show }} - Details</div>
+        <br/>
+        <div class="card-body">
+        <h4 class="card-title">ID: {{ reservations_show.booking_number }}</h4>
+        <p class="card-text">Full Name: {{ reservations_show.full_name }}</p>
+        <p class="card-text">Username: {{ reservations_show.username }}</p>
+        <p class="card-text">Email: {{ reservations_show.email }}</p>
+        <p class="card-text">Phone: {{ reservations_show.phone }}</p>
+        <p class="card-text">Room: {{ reservations_show.room }}</p>
+        <p class="card-text">People: {{ reservations_show.party_size }}</p>
+        <p class="card-text">Check-In: {{ reservations_show.reservation_date }}</p>
+        <p class="card-text">Check-Out: {{ reservations_show.reservation_date_out }}</p>
+        <p class="card-text">Special Requests: {{ reservations_show.special_requests }}</p>
+        <p class="card-text">Wallet: {{ reservations_show.wallet }}</p>
+        <p class="card-text">Price: {{ reservations_show.price }}</p>
+        <p class="card-text">Change: {{ reservations_show.change }}</p>
+        {% if reservations_show.approval_status == True %}
+            <p class="card-text">Approval Status: Approved</p>
+            <p class="card-text">Admin Comment: {{ reservations_show.approval_comment }}</p>
+        {% elif reservations_show.checked == False %}
+            <p class="card-text">Approval Status: Pending</p>
+        {% else %}
+            <p class="card-text">Approval Status: Declined</p>
+            <p class="card-text">Admin Comment: {{ reservations_show.approval_comment }}</p>
+        {% endif %}
+        <br>
+        <a href="{% url 'hotel:listbooking' %}" class="celso">GO BACK</button>
+        </div>
+    </div>
+</div>
+    <center>
+        <h1></h1>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+       
+    </center>
+
+{% endblock content %}

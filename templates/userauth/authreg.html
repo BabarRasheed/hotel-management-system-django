@@ -1,0 +1,38 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">
+
+    <div class="hero">
+        <div class="form-box">
+            
+                <form method="POST" id="signup" class="input-groupsign">
+                    {% csrf_token %}
+                    {{ form }}
+                    <br/>
+                    <br/>
+                    <button type="submit" class="submit-btn">Sign-up</button>
+                </form>
+
+        </div>
+        
+            </div>
+
+            <script>
+            var x = document.getElementById("login");
+            var y = document.getElementById("signup");
+            var z = document.getElementById("btn");
+
+            function signup(){
+                x.style.left = "-400px";
+                y.style.left = "50px";
+                z.style.left = "110px";
+            }
+            function login(){
+                x.style.left = "50px";
+                y.style.left = "450px";
+                z.style.left = "0";
+            }
+            </script>
+
+{% endblock content %}

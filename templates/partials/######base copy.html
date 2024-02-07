@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="{% static 'css/nav.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/dropdown.css' %}"/>
+</head>
+<body>
+    <header>
+        <img src="{% static 'img/logofinal.png' %}" class="logo"/>
+        <ul>
+            <li><a href="{% url 'greedhotel:base' %}">Home</a></li>
+            
+            
+            {% if request.user.isAdmin == True %}
+
+                <li><a href="http://127.0.0.1:8000/admin/">Admin Panel</a></li>
+                <li><div class="dropdown">
+                    <input type="text" class="textBox" placeholder="{{request.user.username}}" readonly>
+                    <div class="option">
+                        <div onclick="redirectToReserveList()">Reservations</div>
+                    </div>
+                </div></li>
+
+                <li><a href="{% url 'hotel:logout' %}">Logout</a></li>
+            
+            {% elif request.user.is_authenticated %}
+
+                <li><a href="{% url 'hotel:book' %}">Book Now</a></li>
+                <li><a href="{% url 'hotel:contactus' %}">Contact Us</a></li>
+                <li><div class="dropdown">
+                    <input type="text" class="textBox" placeholder="{{request.user.username}}" readonly>
+                    <div class="option">
+                        <div onclick="redirectToProfile()">Profile</div>
+                        <div onclick="redirectToBookingList()">My Booking</div>
+                        <div onclick="redirectToLogOut()">Logout</div>
+                    </div>
+                </div></li>
+
+            {% else %}
+
+                <li><a href="{% url 'hotel:contactus' %}">Contact Us</a></li>
+                <li><a href="{% url 'hotel:login' %}">Login</a></li>
+                <li><a href="{% url 'hotel:signup' %}">Sign Up</a></li>
+
+            {% endif %}
+        </ul>
+    </header>
+    <section class="banner">
+        <div class="celso">
+            {% block content %}
+
+            {% endblock %}
+        </div>
+    </section>
+    <script>
+        let dropdown = document.querySelector('.dropdown');
+        dropdown.onclick = function(){
+            dropdown.classList.toggle('active');
+        }
+        function redirectToReserveList() {
+            window.location.href = "{% url 'hotel:listreserve' %}";
+        }
+        function redirectToProfile() {
+            window.location.href = "{% url 'hotel:profile' %}";
+        }
+        function redirectToBookingList() {
+            window.location.href = "{% url 'hotel:listbooking' %}";
+        }
+        function redirectToLogOut() {
+            window.location.href = "{% url 'hotel:logout' %}";
+        }
+    </script>
+    <script type="text/javascript">
+        window.addEventListener("scroll", function(){
+            var header = document.querySelector("header");
+            header.classList.toggle("sticky", window.scrollY > 0);
+        })
+    </script>
+</body>
+</html>

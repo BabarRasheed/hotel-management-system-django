@@ -1,0 +1,118 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/profile.css' %}" />
+
+    <h1>Profile</h1>
+    <form method="POST">
+        {% csrf_token %}
+            <div class="form">
+                {% if request.user.is_authenticated %}
+
+                    <input type="file" class="textinput textInput form-control" name = "profile_picture" value="{{ user.profile_picture }}">
+                    </br>
+
+                    <label for="full_name" class="form-label mt-4">Full Name</label>
+                    <input type="text" class="form-control" id="full_name" name="full_name" value = "{{ user.full_name }}">
+                    </br>
+
+                    <input type="text" name="username" class="form-control" value="{{ user.username }}"/>
+                    </br>
+
+                    <input type="email" name="email" class="textinput textInput form-control" value="{{ user.email }}"/>
+                    </br>
+
+                    <input type="text" name="phone" class="textinput textInput form-control" value="{{ user.phone }}"/>
+                    </br>
+                    
+                    <div class="form-group">
+                        <label for="age" class="form-label mt-4">Gender</label>
+                        <select class="form-select" id = "age" name="age">
+                            <option value = "Prefer Not To Say">-</option>
+                            <option value = "Male">Male</option>
+                            <option value = "Female">Female</option>
+                            <option value = "Other">Other</option>
+                        </select>
+                    </div>
+                    </br>
+
+                    <input type="text" name="country" class="textinput textInput form-control" value="{{ user.country }}"/>
+                    </br>
+                    
+                    <input type="text" name="city" class="textinput textInput form-control" value="{{ user.city }}"/>
+                    </br>
+
+                    <select id = "identity_type" name = "identity_type">
+                        <option value = "National ID Number">National ID Number</option>
+                        <option value = "Driver's License">Driver's License</option>
+                        <option value = "International Passport">International Passport</option>
+                    </select>
+                    </br>
+
+                    <input type="file" class="textinput textInput form-control" name = "identity_image">
+                    </br>
+
+                    <input type="text" name="facebook" value="{{ user.facebook }}"/>
+                    </br>
+
+                    <input type="text" name="twitter" value="{{ user.twitter }}"/>
+                    </br>
+                    
+                    <input type="text" name="wallet" value="{{ user.wallet }}"/>
+                    </br>
+
+                {% else %}
+
+                    {{form.full_name|as_crispy_field}}
+                    <br/>
+
+                    {{form.username|as_crispy_field}}
+                    <br/>
+
+                    {{form.email|as_crispy_field}}
+                    <br/>
+
+                    {{form.phone|as_crispy_field}}
+                    <br/>
+
+                    {{form.gender|as_crispy_field}}
+                    <br/>
+
+                    {{form.country|as_crispy_field}}
+                    <br/>
+
+                    {{form.city|as_crispy_field}}
+                    <br/>
+
+                    {{form.address|as_crispy_field}}
+                    <br/>
+
+                    {{form.identity_type|as_crispy_field}}
+                    <br/>
+
+                    {{form.identity_image|as_crispy_field}}
+                    <br/>
+
+                    {{form.facebook|as_crispy_field}}
+                    <br/>
+
+                    {{form.twitter|as_crispy_field}}
+                    <br/>
+
+                    {{form.wallet|as_crispy_field}}
+                    <br/>
+
+                {% endif %}
+                <br/>
+                <br/>
+                <button type="submit" class="btn btn-lg btn-primary">UPDATE</button>
+            </div>
+    </form>
+    <br/>
+    <br/>        
+    <br/>
+    <br/>
+
+{% endblock content %}

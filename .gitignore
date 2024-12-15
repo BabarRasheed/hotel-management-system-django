@@ -1,0 +1,65 @@
+# Python-related
+*.pyc
+*.pyo
+__pycache__/
+*.db
+*.sqlite3
+*.log
+*.pot
+*.mo
+*.pyd
+*.pid
+*.log
+env/
+venv/
+*.coverage
+*.hypothesis/
+nosetests.xml
+coverage.xml
+*.cover
+
+# Django-related
+*.sqlite3
+/db.sqlite3
+*.log
+*.pot
+*.mo
+*.pyc
+*.pyo
+*.db
+*.log
+/media/
+staticfiles/
+*.bak
+
+# Node.js and frontend-related
+node_modules/
+dist/
+build/
+*.log
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Environment-related
+.env
+.env.*
+*.env
+
+# Editor/IDE specific
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Django migrations
+*/migrations/*
+!*/migrations/__init__.py
+
+# PyCharm
+.idea/
